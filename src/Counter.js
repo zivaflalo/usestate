@@ -1,40 +1,42 @@
-import {useState} from "react"
-function Cuonter() {
-    const [count, setCount] = useState(1);
-    const [delta, setDelta] = useState(1)
+import { useState } from "react";
+function Counter(props) {
+    const{delta} = props
+    const{maxi} = props
+    const [count, setCount] = useState(1)
+    
+    function inc () {
+        setCount(
+            function(oldCount){
+                if (oldCount + delta > maxi) {
+                    return 0
+                }
+                return oldCount + delta
+            }
+        )
+        console.log(count)
+    }
+    function Reset () {
+        setCount(0)
+            }
+
+        console.log(count)
    
-
-    function incr(){
-        setCount(
-            function(oldCount){
-                return oldCount + delta;
-            }
-        )
-    }
-    function reset(){
-        setCount(
-            function(oldCount){
-                return oldCount = 0;
-            }
-        )
-    }
-    function handleDelta(e){
-        setDelta(Number(e.target.value))
-
-    }
-    
-
-    
     return (
-      <div>
-        <h1>counter</h1>
-        <input type="number" value={delta} onChange = {handleDelta}/>
-        <p>Counter is at {count}</p>
-        <button onClick={incr}>Click to add {delta}</button>
-        <br></br>
-        <button onClick={reset}>Reset to 0</button>
+      <div> 
+        <h1 className='primary'> Counter</h1>
+       
+        <p>Counter is at {count} </p>
+        
+        <button onClick={inc} className = 'button-64'>
+            <span class="text">
+                Click to add {delta} to Counter
+            </span>
+        </button>
+        <p> 
+        <button onClick={Reset}> Click to reset the Counter</button>
+        </p>
       </div>
     );
   }
   
-  export default Cuonter;
+  export default Counter;
